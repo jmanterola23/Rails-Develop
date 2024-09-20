@@ -1,0 +1,29 @@
+<h1>Lista de Reuniones</h1>
+
+<%= link_to 'Nueva Reunión', new_meet_path %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Descripción</th>
+      <th>Duración Estimada</th>
+      <th>Cantidad de Asistentes</th>
+      <th>Hora de Inicio</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @meets.each do |meet| %>
+      <tr>
+        <td><%= meet.description %></td>
+        <td><%= meet.estimated_time %> minutos</td>
+        <td><%= meet.cant_asist %></td>
+        <td><%= meet.start_hour %></td>
+        <td>
+          <%= link_to 'Mostrar', meet_path(meet) %> |
+          <%= link_to 'Eliminar', meet_path(meet), method: :delete, data: { confirm: '¿Estás seguro?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,51 @@
+<h1>Calendario de <%= @room.name %></h1>
+
+<%= link_to 'Crear Nueva Reunión', new_room_meet_path(@room), class: 'btn btn-primary' %>
+
+<%= month_calendar(events: @meets) do |date, meets| %>
+  <div class="day">
+    <span><%= date.day %></span>
+    <% if meets.any? %>
+      <% meets.each do |meet| %>
+        <div class="event" data-toggle="modal" data-target="#meetModal" data-meet-id="<%= meet.id %>" data-room-id="<%= @room.id %>">
+          <%= meet.description %> (De <%= meet.start_hour.strftime('%H:%M') %> a <%= meet.end_hour.strftime('%H:%M') %>)
+        </div>
+      <% end %>
+    <% else %>
+      <div class="no-events">No hay reuniones</div>
+    <% end %>
+  </div>
+<% end %>
+
+<!-- Modal -->
+<div class="modal fade" id="meetModal" tabindex="-1" role="dialog" aria-labelledby="meetModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="meetModalLabel">Detalles de la Reunión</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="meetDetails">
+        <!-- Los detalles de la reunión se inyectarán aquí -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+$(document).ready(function() {
+  $('[data-toggle="modal"]').click(function() {
+    var meetId = $(this).data('meet-id');
+    var roomId = $(this).data('room-id');
+    $.get('/rooms/' + roomId + '/meets/' + meetId, function(data) {
+      $('#meetDetails').html(data); // Aquí se inyectan los detalles en el modal
+      $('#meetModal').modal('show'); // Mostrar el modal
+    });
+  });
+});
+</script>

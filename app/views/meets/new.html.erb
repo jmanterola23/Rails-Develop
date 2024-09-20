@@ -1,0 +1,35 @@
+<%= form_with(model: @meet, url: room_meets_path(@room)) do |form| %>
+  <% if @meet.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@meet.errors.count, "error") %> prohibieron que se guardara esta reunión:</h2>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :start_hour %>
+    <%= form.datetime_select :start_hour %>
+  </div>
+
+  <div class="field">
+    <%= form.label :end_hour %>
+    <%= form.datetime_select :end_hour %>
+  </div>
+
+  <%= form.hidden_field :estimated_time, value: @estimated_time %>
+
+  <div class="field">
+    <%= form.label :cant_asist %>
+    <%= form.number_field :cant_asist %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Crear Reunión" %>
+  </div>
+<% end %>
+
+<%= link_to 'Volver', room_path(@room) %>

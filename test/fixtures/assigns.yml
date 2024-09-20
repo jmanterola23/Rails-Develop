@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  room: one
+  meet: one
+  schedule: MyString
+
+two:
+  room: two
+  meet: two
+  schedule: MyString

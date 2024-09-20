@@ -1,0 +1,32 @@
+<h1>Detalles de las Reuniones Agendadas</h1>
+
+<% if @meets.present? %>
+  <% @meets.each do |meet| %>
+    <div>
+      <h2>Reunión: <%= meet.description %></h2>
+      <p>Fecha: <%= meet.start_hour %> - <%= meet.end_hour %></p>
+      <p>Sala: <%= meet.room&.name || "Sala no asignada" %></p>
+      <hr>
+    </div>
+  <% end %>
+<% else %>
+  <p>No hay reuniones agendadas.</p>
+<% end %>
+<h2>Salas disponibles</h2>
+<% if @rooms.any? %>
+  <ul>
+    <% @rooms.each do |room| %>
+      <li>
+        <%= link_to room.name, room_path(room) %> <!-- Enlace a la vista de detalles de la sala -->
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No hay salas disponibles en este momento.</p>
+<% end %>
+
+
+
+
+
+

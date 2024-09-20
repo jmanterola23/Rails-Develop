@@ -1,0 +1,5 @@
+<h4>Detalles de la Reunión</h4>
+<p><strong>Descripción:</strong> <%= @meet.description %></p>
+<p><strong>Hora de inicio:</strong> <%= @meet.start_hour.strftime('%H:%M') %></p>
+<p><strong>Hora de fin:</strong> <%= @meet.end_hour.strftime('%H:%M') %></p>
+<p><strong>Duración estimada:</strong> <%= @meet.estimated_time %> minutos</p>
